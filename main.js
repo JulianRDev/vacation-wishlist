@@ -4,7 +4,7 @@ function formsubmittion(e) {
 
     let destName = document.querySelector("#name").value;
     let destLocation = document.querySelector("#location").value;
-    let destPhoto = document.querySelector("#photo").src;
+    let destPhoto = document.querySelector("#photo").value;
     let destDescription = document.querySelector("#description").value;
     let form = document.querySelector("#form")
 
@@ -54,7 +54,7 @@ function createWishlistCard(name, location, imgUrl, description) {
 
     if (imgUrl.length === 0) {
         image.src = defaultImg;
-    } else (image.setAttribute("src", imgUrl))
+    } else {image.src = imgUrl}
     // add image to card
     card.appendChild(image)
     // attributes of card ex. name, location description
