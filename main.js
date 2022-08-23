@@ -44,7 +44,7 @@ function formsubmittion(e) {
 // creating the actual cards for wishlist
 function createWishlistCard(name, location, imgUrl, description) {
     let card = document.createElement("div");
-    card.setAttribute("class", "wishlistCard container-fluid")
+    card.setAttribute("class", "wishlistCard card")
 
     let image = document.createElement("img")
     image.setAttribute("class", "card-img-top")
