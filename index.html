@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div>
+        <div class="header jumbotron jumbotron-fluid">
+            <h1 class="display-4">Vacation Destination Wishlist</h1>
+            <p class="lead">Found exciting places to visition on your next vacation? Use the form below to add them to your wishlist
+            </p>
+        </div>
+        <div class="">
+            <div class="form col-md-3">
+                <form id="form" action="">
+                    <div class="form-group">
+                        <label for="name" class="form-label"> Destination Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter the name of the destination" required minlength="3">
+                    </div>
+                    <div class="form-group">
+                        <label for="location" class="form-label ">Location</label>
+                        <input type="text" class="form-control" id="location" placeholder="Where is it located?" required minlength="2">
+                    </div class="f">
+                    <div>
+                        <label for="photo" class="form-label ">Photo</label>
+                        <input type="url" class="form-control" id="photo" placeholder="Enter an image url of the place">
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="form-label ">Description</label>
+                        <input type="text" class="form-control" id="description" placeholder="Where is it located?" required minlength="2">
+                    </div>
+                    <button class="btn btn-primary" type="submit" id="submit"> Add to list</button>
+                </form>
+            </div>
+            <div class="wishlist">
+                <h2 class="vacation">Enter Destinaiton Details</h2>
+                <div id="destinations">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

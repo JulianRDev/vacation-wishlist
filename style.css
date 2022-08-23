@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+}
+
+.form,
+.wishlist {
+    float: left;
+    width: 50%;
+}
+
+.header {
+    text-align: center;
+    padding-top: 50px;
+    height: 200px;
+    background-color: lightgray;
+}
+
+h2 {
+    text-align: center;
+}
+
+.wishlistCard {
+    text-align: center;
+    width: 20%;
+    height: fit-content;
+    margin: 10px;
+    text-size-adjust: 20px;
+    float: left;
+}
+
+.wishCardImg {
+    width: 100px;
+    height: fit-content;
+}
+
+.cardAttributes {
+    text-align: center;
+}
