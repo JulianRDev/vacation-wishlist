@@ -44,11 +44,11 @@ function formsubmittion(e) {
 // creating the actual cards for wishlist
 function createWishlistCard(name, location, description) {
     let card = document.createElement("div");
-    card.setAttribute("class", "wishlistCard card")
+    card.setAttribute("class", "wishlistCard card h-100")
 
 
     let image = document.createElement("img")
-    image.setAttribute("class", "card-img-top rounded mx-auto d-block")
+    image.setAttribute("class", "card-img-top h-100")
     card.appendChild(image)
 
     // attributes of card ex. name, location description
@@ -104,7 +104,7 @@ function getDestinationImg(cardImg){
 
     console.log(destName + "destination name")
     console.log(destLocation + "destination Location")
-    fetch(`https://api.unsplash.com/search/photos/?client_id=iIztS3rev5bX3GLD4YCmq16pPVqgGkKl-WhxL7KPWGM&query=${destName}&query=${destLocation}`)
+    fetch(`https://api.unsplash.com/search/photos/?client_id=iIztS3rev5bX3GLD4YCmq16pPVqgGkKl-WhxL7KPWGM&query=${destName,destLocation}&orientation=landscape&h=200`)
     .then(res => res.json())
     .then( data => {
 
@@ -120,7 +120,7 @@ function getDestinationImg(cardImg){
             cardImg.src = defaultImg;
         } else {
             console.log(data.results.length)
-            let random = Math.floor(Math.random() * data.results.length - 1)
+            let random = Math.floor(Math.random() * data.results.length)
             console.log(random)
             let destinationUrl = data.results[random].urls.regular
             cardImg.src = destinationUrl}
