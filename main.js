@@ -1,10 +1,11 @@
 document.querySelector("form").addEventListener('submit', formsubmittion)
 
+let destName = null
+
 function formsubmittion(e) {
 
-    let destName = document.querySelector("#name").value;
+    destName = document.querySelector("#name").value;
     let destLocation = document.querySelector("#location").value;
-    let destPhoto = document.querySelector("#photo").value;
     let destDescription = document.querySelector("#description").value;
     let form = document.querySelector("#form")
 
@@ -24,7 +25,6 @@ function formsubmittion(e) {
     let wishCard = createWishlistCard(
         destName,
         destLocation,
-        destPhoto,
         destDescription
     );
 
@@ -42,29 +42,25 @@ function formsubmittion(e) {
 }
 
 // creating the actual cards for wishlist
-function createWishlistCard(name, location, imgUrl, description) {
+function createWishlistCard(name, location, description) {
     let card = document.createElement("div");
     card.setAttribute("class", "wishlistCard card")
 
+
     let image = document.createElement("img")
     image.setAttribute("class", "card-img-top")
-
-    // default image if not is input
-    let defaultImg = "img/vaca.jpeg"
-
-    if (imgUrl.length === 0) {
-        image.src = defaultImg;
-    } else {image.src = imgUrl}
-    // add image to card
     card.appendChild(image)
+
     // attributes of card ex. name, location description
     let cardAttributes = document.createElement("div")
     cardAttributes.setAttribute("class", "card-body")
+
     // create h3 and add destination to card
     let cardHeader = document.createElement("h3")
     cardHeader.innerText = name
     cardHeader.setAttribute("class", "cardTitle card-title")
     cardAttributes.appendChild(cardHeader)
+
     //create h4 and location to card
     cardLocation = document.createElement("h4")
     cardLocation.innerText = location
@@ -98,8 +94,33 @@ function createWishlistCard(name, location, imgUrl, description) {
 
     card.appendChild(cardAttributes)
 
+    getDestinationImg(image)
+
     return card;
 
+}
+
+function getDestinationImg(cardImg){
+
+    console.log(destName + "destination name")
+
+    fetch(`https://api.unsplash.com/photos/random/?client_id=iIztS3rev5bX3GLD4YCmq16pPVqgGkKl-WhxL7KPWGM&query=${destName}`)
+    .then(res => res.json())
+    .then( data => {
+
+        console.log(data + "destination image")
+    
+        // default image if not is input
+        let defaultImg = "img/vaca.jpeg"
+    
+        let destinationUrl = data.urls.full
+        if (destinationUrl.length === 0) {
+            cardImg.src = defaultImg;
+        } else {cardImg.src = destinationUrl}
+
+}).catch(err => {
+    console.log(`error ${err}`)
+})
 }
 
 // edit button function 
