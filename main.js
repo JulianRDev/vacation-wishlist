@@ -48,7 +48,7 @@ function createWishlistCard(name, location, description) {
 
 
     let image = document.createElement("img")
-    image.setAttribute("class", "card-img-top")
+    image.setAttribute("class", "card-img-top rounded mx-auto d-block")
     card.appendChild(image)
 
     // attributes of card ex. name, location description
@@ -112,13 +112,16 @@ function getDestinationImg(cardImg){
     
         // default image if not is input
         let defaultImg = "img/vaca.jpeg"
-        let random = Math.floor(Math.random() * data.results.length - 1)
+
         
         // let destinationUrl = data.results[random].urls.regular
 
         if (data.results.length === 0) {
             cardImg.src = defaultImg;
         } else {
+            console.log(data.results.length)
+            let random = Math.floor(Math.random() * data.results.length - 1)
+            console.log(random)
             let destinationUrl = data.results[random].urls.regular
             cardImg.src = destinationUrl}
 
