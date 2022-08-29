@@ -1,11 +1,11 @@
 document.querySelector("form").addEventListener('submit', formsubmittion)
 
 let destName = null
-
+let destLocation = null
 function formsubmittion(e) {
 
     destName = document.querySelector("#name").value;
-    let destLocation = document.querySelector("#location").value;
+    destLocation = document.querySelector("#location").value;
     let destDescription = document.querySelector("#description").value;
     let form = document.querySelector("#form")
 
@@ -103,8 +103,8 @@ function createWishlistCard(name, location, description) {
 function getDestinationImg(cardImg){
 
     console.log(destName + "destination name")
-
-    fetch(`https://api.unsplash.com/photos/random/?client_id=iIztS3rev5bX3GLD4YCmq16pPVqgGkKl-WhxL7KPWGM&query=${destName}`)
+    console.log(destLocation + "destination Location")
+    fetch(`https://api.unsplash.com/search/photos/?client_id=iIztS3rev5bX3GLD4YCmq16pPVqgGkKl-WhxL7KPWGM&query=${destName}&query=${destLocation}`)
     .then(res => res.json())
     .then( data => {
 
@@ -112,8 +112,10 @@ function getDestinationImg(cardImg){
     
         // default image if not is input
         let defaultImg = "img/vaca.jpeg"
-    
-        let destinationUrl = data.urls.full
+        
+        let random = Math.floor(Math.random() * data.results.length - 1)
+
+        let destinationUrl = data.results[random].urls.regular
         if (destinationUrl.length === 0) {
             cardImg.src = defaultImg;
         } else {cardImg.src = destinationUrl}
