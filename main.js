@@ -108,17 +108,19 @@ function getDestinationImg(cardImg){
     .then(res => res.json())
     .then( data => {
 
-        console.log(data + "destination image")
+        console.log(data + "destination")
     
         // default image if not is input
         let defaultImg = "img/vaca.jpeg"
-        
         let random = Math.floor(Math.random() * data.results.length - 1)
+        
+        // let destinationUrl = data.results[random].urls.regular
 
-        let destinationUrl = data.results[random].urls.regular
-        if (destinationUrl.length === 0) {
+        if (data.results.length === 0) {
             cardImg.src = defaultImg;
-        } else {cardImg.src = destinationUrl}
+        } else {
+            let destinationUrl = data.results[random].urls.regular
+            cardImg.src = destinationUrl}
 
 }).catch(err => {
     console.log(`error ${err}`)
