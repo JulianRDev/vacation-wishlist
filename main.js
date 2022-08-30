@@ -28,13 +28,13 @@ function formsubmittion(e) {
         destDescription
     );
 
-    let wishList = document.getElementById("destinations")
+    let wishList = document.querySelector(".destinations")
 
     if (wishList.children.length >= 0) {
         document.querySelector(".vacation").innerHTML = "My Wishlist"
     }
 
-    document.querySelector("#destinations").appendChild(wishCard)
+    document.querySelector(".destinations").appendChild(wishCard)
 
     e.preventDefault();
 
@@ -44,7 +44,7 @@ function formsubmittion(e) {
 // creating the actual cards for wishlist
 function createWishlistCard(name, location, description) {
     let card = document.createElement("div");
-    card.setAttribute("class", "wishlistCard card h-100")
+    card.setAttribute("class", "wishlistCard card col-md-3 h-100")
 
 
     let image = document.createElement("img")
@@ -64,7 +64,7 @@ function createWishlistCard(name, location, description) {
     //create h4 and location to card
     cardLocation = document.createElement("h4")
     cardLocation.innerText = location
-    cardLocation.setAttribute("class", "cardLocation card-subtitle mb-2 text-muted")
+    cardLocation.setAttribute("class", "cardLocation card-subtitle text-muted")
     cardAttributes.appendChild(cardLocation)
 
     if (description.length > 0) {
@@ -122,7 +122,7 @@ function getDestinationImg(cardImg){
             console.log(data.results.length)
             let random = Math.floor(Math.random() * data.results.length)
             console.log(random)
-            let destinationUrl = data.results[random].urls.regular
+            let destinationUrl = data.results[random].urls.raw
             cardImg.src = destinationUrl}
 
 }).catch(err => {

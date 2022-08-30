@@ -9,8 +9,9 @@
     background-color: lightgray;
 }
 
-h2 {
+.vacation{
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .wishlistCard {
@@ -20,12 +21,16 @@ h2 {
     margin: 10px;
     text-size-adjust: 20px;
     float: left;
+    padding: 0;
+}
+.wishlist{
+    margin-top: 10px;
 }
 
-.wishCardImg {
+/* .wishCardImg {
     width: 100px;
     height: fit-content;
-}
+} */
 
 .cardAttributes {
     text-align: center;
