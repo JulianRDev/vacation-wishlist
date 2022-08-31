@@ -9,19 +9,6 @@ function formsubmittion(e) {
     let destDescription = document.querySelector("#description").value;
     let form = document.querySelector("#form")
 
-
-    // did this for validation before making eventlistener submit 
-
-    // if(destName.length === 0){
-    //     destName.setAttribute("required")
-    // }
-    // if(destLocation.length === 0){
-    //     destLocation.setAttribute("required")
-    // }
-    // if(destDescription.length === 0){
-    //     destDescription.setAttribute("required")
-    // }
-
     let wishCard = createWishlistCard(
         destName,
         destLocation,
@@ -67,12 +54,12 @@ function createWishlistCard(name, location, description) {
     cardLocation.setAttribute("class", "cardLocation card-subtitle text-muted")
     cardAttributes.appendChild(cardLocation)
 
-    if (description.length > 0) {
-        cardDescription = document.createElement("p")
-        cardDescription.innerText = description
-        cardDescription.setAttribute("class", "cardDescription card-text")
-        cardAttributes.appendChild(cardDescription)
-    }
+    
+    cardDescription = document.createElement("p")
+    cardDescription.innerText = description
+    cardDescription.setAttribute("class", "cardDescription card-text")
+    cardAttributes.appendChild(cardDescription)
+
 
     
 
@@ -133,6 +120,7 @@ function getDestinationImg(cardImg){
 // edit button function 
 function edit(e) {
     let cardAtts = e.target.parentNode.parentNode
+    console.log(e.target.parentNode.parentNode)
     let nameInput = cardAtts.children[0]
     let locationInput = cardAtts.children[1]
     let descriptionInput = cardAtts.children[2]
@@ -153,5 +141,6 @@ function edit(e) {
 }
 // delete card function
 function deleteCard(e) {
+    console.log(e.target.parentNode.parentNode.parentNode)
     e.target.parentNode.parentNode.parentNode.remove();
 }
