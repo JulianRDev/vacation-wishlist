@@ -7,7 +7,7 @@ const MongoClient = require('mongodb').MongoClient
 const ObjectId = require('mongodb').ObjectId
 const fetch = require('node-fetch')
 require('dotenv').config()
-
+const port = process.env.PORT || 8000
 
 const url = process.env.MONGODB_URL
 
@@ -106,7 +106,7 @@ MongoClient.connect(url, { useUnifiedTopology: true })
             .catch(error => console.error(error))
         })
 
-        app.listen(8000, () => {
+        app.listen(port, () => {
             console.log('listening on 8000')
         })
     })
