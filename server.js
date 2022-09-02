@@ -6,14 +6,19 @@ const app = express()
 const MongoClient = require('mongodb').MongoClient
 const ObjectId = require('mongodb').ObjectId
 const fetch = require('node-fetch')
+const cors = require('cors')
 require('dotenv').config()
 const port = process.env.PORT || 8000
+
 
 const url = process.env.MONGODB_URL
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.use(express.static('public'))
+app.use(cors({
+ origin:'*'
+}));
 
 MongoClient.connect(url, { useUnifiedTopology: true })
     .then(client => {
