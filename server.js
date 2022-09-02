@@ -15,7 +15,7 @@ const url = process.env.MONGODB_URL
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/public'))
+app.use(express.static('public'))
 app.use(cors({
  origin:'*'
 }));
