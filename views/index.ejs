@@ -31,8 +31,8 @@
                     </div>
                     <div class="form-group">
                         <label for="location" class="form-label ">Location</label>
-                        <input type="text" class="form-control" id="location" name="location" placeholder="Where is it located? Ex. Boston,MA"
-                            required minlength="2">
+                        <input type="text" class="form-control" id="location" name="location"
+                            placeholder="Where is it located? Ex. Boston,MA" required minlength="2">
                     </div class="f">
                     <!-- <div>
                         <label for="photo" class="form-label ">Photo</label>
@@ -40,8 +40,8 @@
                     </div> -->
                     <div class="form-group">
                         <label for="description" class="form-label ">Description</label>
-                        <input type="text" class="form-control" id="description" name="description" placeholder="Where is it located?"
-                            required minlength="2">
+                        <input type="text" class="form-control" id="description" name="description"
+                            placeholder="Where is it located?" required minlength="2">
                     </div>
                     <button class="btn btn-primary" type="submit" id="submit"> Add to list</button>
                 </form>
@@ -49,13 +49,23 @@
             <div class="wishlist col-md-9">
                 <h2 class="vacation">Enter Destinaiton Details</h2>
                 <div class="destinations row g-4">
-
+                    <% for(let i=0; i < destinations.length; i++){%>
+                        <div class="wishlistCard card col-md-3 h-100">
+                            <img src="<%= destinations[i].image %>" alt="" class="card-img-top h-100">
+                            <div class="card-body">
+                                <h3 class="cardTitle card-title"><%= destinations[i].name %></h3>
+                                <h4 class="cardLocation card-subtitle text-muted"><%= destinations[i].location %></h4>
+                                <p class="cardDescription card-text"><%= destinations[i].description %></p>
+                                <button class="btn btn-warning editbtn" onclick="edit('<%= destinations[i]._id %>')">Edit</button>
+                                <button class="btn btn-danger deletebtn" onclick="deleteBtn('<%= destinations[i]._id %>')" >Delete</button>
+                            </div>
+                        </div>
+                    <% } %>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="main.js"></script>
+        <script src="main.js"></script>
 </body>
 
 </html>
