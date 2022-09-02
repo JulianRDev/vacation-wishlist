@@ -11,7 +11,7 @@ require('dotenv').config()
 const port = process.env.PORT || 8000
 
 
-const url = MONGODB_URL
+const url = process.env.MONGODB_URL
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
@@ -45,7 +45,7 @@ MongoClient.connect(url, { useUnifiedTopology: true })
             let location = req.body.location
             let image
             try {
-                let destImg = await fetch(`https://api.unsplash.com/search/photos/?client_id=${CLIENT_ID}&query=${name, location}&orientation=landscape&h=200`)
+                let destImg = await fetch(`https://api.unsplash.com/search/photos/?client_id=${process.env.CLIENT_ID}&query=${name, location}&orientation=landscape&h=200`)
                 image = await destImg.json()
             }
             catch {
@@ -71,7 +71,7 @@ MongoClient.connect(url, { useUnifiedTopology: true })
             let image
 
             try{
-                let destImg = await fetch(`https://api.unsplash.com/search/photos/?client_id=${CLIENT_ID}&query=${name, location}&orientation=landscape&h=200`)
+                let destImg = await fetch(`https://api.unsplash.com/search/photos/?client_id=${process.env.CLIENT_ID}&query=${name, location}&orientation=landscape&h=200`)
                 image = await destImg.json()
             }catch{
                 image = "img/vaca.jpeg"
