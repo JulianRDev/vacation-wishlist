@@ -51,7 +51,7 @@
                 <div class="destinations row g-4">
                     <% for(let i=0; i < destinations.length; i++){%>
                         <div class="wishlistCard card col-md-3 h-100">
-                            <img src="<%= destinations[i].image %>" alt="" class="card-img-top h-100">
+                            <img src="<%= destinations[i].image ? destinations[i].image : "img/vaca.jpeg"%>" alt="" class="card-img-top h-100">
                             <div class="card-body">
                                 <h3 class="cardTitle card-title"><%= destinations[i].name %></h3>
                                 <h4 class="cardLocation card-subtitle text-muted"><%= destinations[i].location %></h4>

@@ -39,42 +39,47 @@ MongoClient.connect(url, { useUnifiedTopology: true })
 
         app.post('/destinations', async (req, res) => {
 
-            let name = req.body.name
-            let location = req.body.location
-            let image
+            
             try {
-                let destImg = await fetch(`https://api.unsplash.com/search/photos/?client_id=${process.env.CLIENT_ID}&query=${name, location}&orientation=landscape&h=200`)
-                image = await destImg.json()
-            }
-            catch {
-                image = "img/vaca.jpeg"
-            } finally {
-                let random = Math.floor(Math.random() * image.results.length)
-                req.body.image = image.results[random].urls.raw
+                let destImg = await fetch(`https://api.unsplash.com/search/photos/?client_id=${process.env.CLIENT_ID}&query=${req.body.name, req.body.location}&orientation=landscape&h=200`)
+                let allImg = await destImg.json()
 
-                destinationsCardsCollection.insertOne(req.body)
+                let imgUrl
+                console.log(allImg)
+                let random = Math.floor(Math.random() * allImg.results.length)
+                if(allImg.results.length > 0 )
+                {imgUrl = allImg.results[random].urls.raw }
+            
+
+                destinationsCardsCollection.insertOne({
+                    image : imgUrl,
+                    name : req.body.name,
+                    location : req.body.location,
+                    description: req.body.description
+
+                })
                     .then(result => {
                         res.redirect('/')
                     })
                     .catch(error => console.error(error))
-            }
+                }
+                catch(error){
+                    console.error(error)
+                }
         })
 
         app.put('/destinations', async (req,res) => {
             let objectId = ObjectId(req.body._id)
-            let name = req.body.name
-            let location = req.body.location
-            let image
 
             try{
-                let destImg = await fetch(`https://api.unsplash.com/search/photos/?client_id=${process.env.CLIENT_ID}&query=${name, location}&orientation=landscape&h=200`)
-                image = await destImg.json()
-            }catch{
-                image = "img/vaca.jpeg"
-            }finally{
+                let destImg = await fetch(`https://api.unsplash.com/search/photos/?client_id=${process.env.CLIENT_ID}&query=${req.body.name, req.body.location}&orientation=landscape&h=200`)
+                let allImg = await destImg.json()
 
-                let random = Math.floor(Math.random() * image.results.length)
-                req.body.image = image.results[random].urls.raw
+                let imgUrl
+                console.log(allImg)
+                let random = Math.floor(Math.random() * allImg.results.length)
+                if(allImg.results.length > 0 )
+                {imgUrl = allImg.results[random].urls.raw }
 
             destinationsCardsCollection.findOneAndUpdate({_id: objectId},
                 {
@@ -82,7 +87,7 @@ MongoClient.connect(url, { useUnifiedTopology: true })
                         name: req.body.name,
                         location: req.body.location,
                         description: req.body.description,
-                        image: req.body.image
+                        image: imgUrl
                     }
                 },{
                     upsert: true
@@ -91,6 +96,9 @@ MongoClient.connect(url, { useUnifiedTopology: true })
                 .then(result => 
                     res.json('Successfully updated'))
                 .catch(error => console.error(error))
+            }
+            catch(error){
+                console.error(error)
             }
         })
 
