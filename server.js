@@ -15,7 +15,7 @@ const url = process.env.MONGODB_URL
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'))
 app.use(cors({
  origin:'*'
 }));
@@ -33,13 +33,11 @@ MongoClient.connect(url, { useUnifiedTopology: true })
             db.collection('destinations').find().toArray()
                 .then(results => {
                     res.render('index.ejs', { destinations: results })
-                    console.log(results)
                 })
                 .catch(error => console.error(error))
         })
 
         app.post('/destinations', async (req, res) => {
-            console.log(req.body)
 
             let name = req.body.name
             let location = req.body.location
@@ -57,10 +55,8 @@ MongoClient.connect(url, { useUnifiedTopology: true })
                 destinationsCardsCollection.insertOne(req.body)
                     .then(result => {
                         res.redirect('/')
-                        console.log(result)
                     })
                     .catch(error => console.error(error))
-                console.log(req.body)
             }
         })
 
@@ -99,9 +95,7 @@ MongoClient.connect(url, { useUnifiedTopology: true })
         })
 
         app.delete('/destinations', (req,res) => {
-            console.log(req.body)
             let objectId = new ObjectId(req.body._id)
-            console.log(objectId)
             destinationsCardsCollection.deleteOne(
                 {_id: objectId}
             )
